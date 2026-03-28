@@ -1,0 +1,2121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCAT Prep — June 12, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --navy: #0d1117;
+    --navy2: #161b22;
+    --navy3: #1c2333;
+    --navy4: #21262d;
+    --teal: #39d0a0;
+    --teal2: #26a87e;
+    --teal3: #1a7a5e;
+    --amber: #f7a235;
+    --amber2: #c47e1f;
+    --red: #e05c5c;
+    --green: #5cb85c;
+    --muted: #8b949e;
+    --text: #e6edf3;
+    --text2: #b0bac7;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --cp: #5b8dee;
+    --cars: #e05c9a;
+    --bb: #39d0a0;
+    --ps: #f7a235;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    background: var(--navy2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-family: 'Crimson Pro', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--teal);
+    letter-spacing: 0.02em;
+  }
+  .logo span { color: var(--text2); font-weight: 400; font-size: 15px; margin-left: 8px; }
+  .countdown-header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  .cd-unit {
+    text-align: center;
+  }
+  .cd-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--teal);
+    line-height: 1;
+  }
+  .cd-label {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .cd-sep { color: var(--border2); font-size: 20px; padding-bottom: 4px; }
+
+  /* ── Nav ── */
+  nav {
+    background: var(--navy2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 0;
+    padding: 0 2rem;
+    overflow-x: auto;
+  }
+  nav button {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    padding: 14px 18px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  nav button:hover { color: var(--text); }
+  nav button.active { color: var(--teal); border-bottom-color: var(--teal); }
+
+  /* ── Layout ── */
+  main { padding: 2rem; max-width: 1100px; margin: 0 auto; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .card-title {
+    font-family: 'Crimson Pro', serif;
+    font-size: 18px;
+    color: var(--text);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .icon { font-size: 16px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  @media (max-width: 700px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    header { padding: 0 1rem; }
+    main { padding: 1rem; }
+  }
+
+  /* ── Metric tiles ── */
+  .metric {
+    background: var(--navy3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+  }
+  .metric-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px; }
+  .metric-value { font-family: 'DM Mono', monospace; font-size: 28px; font-weight: 500; color: var(--text); line-height: 1; }
+  .metric-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* ── Progress bars ── */
+  .prog-row { margin-bottom: 14px; }
+  .prog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .prog-label { font-size: 13px; color: var(--text2); }
+  .prog-val { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--muted); }
+  .prog-track { height: 6px; background: var(--navy4); border-radius: 3px; overflow: hidden; }
+  .prog-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+
+  /* ── Section colors ── */
+  .fill-cp { background: var(--cp); }
+  .fill-cars { background: var(--cars); }
+  .fill-bb { background: var(--bb); }
+  .fill-ps { background: var(--ps); }
+  .fill-teal { background: var(--teal); }
+  .fill-amber { background: var(--amber); }
+
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .badge-cp { background: rgba(91,141,238,0.15); color: var(--cp); }
+  .badge-cars { background: rgba(224,92,154,0.15); color: var(--cars); }
+  .badge-bb { background: rgba(57,208,160,0.15); color: var(--bb); }
+  .badge-ps { background: rgba(247,162,53,0.15); color: var(--ps); }
+  .badge-amber { background: rgba(247,162,53,0.15); color: var(--amber); }
+  .badge-teal { background: rgba(57,208,160,0.15); color: var(--teal); }
+  .badge-red { background: rgba(224,92,92,0.15); color: var(--red); }
+
+  /* ── Phase timeline ── */
+  .phase-bar {
+    display: flex;
+    height: 40px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .phase-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    cursor: pointer;
+    transition: opacity 0.2s;
+    position: relative;
+  }
+  .phase-seg:hover { opacity: 0.85; }
+  .phase-1 { background: linear-gradient(90deg, #1d5a8c, #2070b0); flex: 4; }
+  .phase-2 { background: linear-gradient(90deg, #1a7a5e, #26a87e); flex: 4; }
+  .phase-3 { background: linear-gradient(90deg, #884a0e, #c47e1f); flex: 3; }
+  .today-marker {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: white;
+    opacity: 0.8;
+    pointer-events: none;
+  }
+  .today-marker::after {
+    content: 'TODAY';
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    color: white;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Week grid ── */
+  .week-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+  .week-card {
+    background: var(--navy3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .week-card:hover { border-color: var(--border2); }
+  .week-card.current { border-color: var(--teal); }
+  .week-card.done { opacity: 0.6; }
+  .week-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .week-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+  .week-theme { font-size: 13px; color: var(--text); font-weight: 500; margin-bottom: 6px; line-height: 1.3; }
+  .week-focus { font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .week-done-toggle {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border2);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    background: none;
+    color: var(--teal);
+    font-size: 12px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .week-done-toggle.checked { background: var(--teal); border-color: var(--teal); color: var(--navy); }
+
+  /* ── Section tracker ── */
+  .section-card {
+    background: var(--navy3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+  .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+  .section-name { font-family: 'Crimson Pro', serif; font-size: 17px; }
+  .score-display {
+    font-family: 'DM Mono', monospace;
+    font-size: 36px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    line-height: 1;
+  }
+  .score-max { font-size: 14px; color: var(--muted); }
+  .score-input-row { display: flex; gap: 8px; align-items: center; margin-top: 10px; }
+  .score-input-row input {
+    background: var(--navy4);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    width: 70px;
+  }
+  .score-input-row input:focus { outline: none; border-color: var(--teal); }
+  .btn-sm {
+    background: var(--navy4);
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-sm:hover { background: var(--navy2); }
+  .btn-primary {
+    background: var(--teal3);
+    border: 1px solid var(--teal2);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--teal2); }
+  .confidence-row { display: flex; gap: 6px; margin-top: 8px; }
+  .conf-btn {
+    flex: 1;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--navy4);
+    color: var(--muted);
+    font-size: 11px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .conf-btn.active-low { background: rgba(224,92,92,0.2); border-color: var(--red); color: var(--red); }
+  .conf-btn.active-mid { background: rgba(247,162,53,0.2); border-color: var(--amber); color: var(--amber); }
+  .conf-btn.active-high { background: rgba(57,208,160,0.2); border-color: var(--teal); color: var(--teal); }
+
+  /* ── Daily schedule ── */
+  .schedule-block {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .schedule-block:last-child { border-bottom: none; }
+  .sched-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    width: 70px;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+  .sched-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .sched-info { flex: 1; }
+  .sched-title { font-size: 14px; color: var(--text); font-weight: 500; }
+  .sched-desc { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+  .sched-duration { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); flex-shrink: 0; padding-top: 3px; }
+  .timer-btn {
+    background: var(--navy4);
+    border: 1px solid var(--border);
+    color: var(--teal);
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 5px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-family: 'DM Mono', monospace;
+  }
+  .timer-btn:hover { border-color: var(--teal); }
+  .timer-display {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    margin-top: 4px;
+    display: none;
+  }
+
+  /* ── FL Test tracker ── */
+  .fl-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .fl-row:last-child { border-bottom: none; }
+  .fl-name { font-size: 13px; font-weight: 500; width: 80px; flex-shrink: 0; }
+  .fl-score-input {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    background: var(--navy4);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 5px 8px;
+    border-radius: 6px;
+    width: 64px;
+    text-align: center;
+  }
+  .fl-score-input:focus { outline: none; border-color: var(--teal); }
+  .fl-section-scores { display: flex; gap: 6px; flex: 1; }
+  .fl-sec-score {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    background: var(--navy4);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 4px 6px;
+    border-radius: 5px;
+    width: 50px;
+    text-align: center;
+  }
+  .fl-sec-score:focus { outline: none; border-color: var(--teal); }
+  .fl-date { font-size: 12px; color: var(--muted); width: 80px; flex-shrink: 0; }
+  .fl-status {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+  .fl-pending { background: rgba(139,148,158,0.15); color: var(--muted); }
+  .fl-done { background: rgba(57,208,160,0.15); color: var(--teal); }
+
+  /* ── Check-in ── */
+  .checkin-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    background: var(--navy4);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    resize: vertical;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--teal); }
+  .form-group select option { background: var(--navy3); }
+  .energy-btns { display: flex; gap: 6px; }
+  .energy-btn {
+    flex: 1;
+    padding: 7px 4px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--navy4);
+    color: var(--muted);
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .energy-btn.selected { background: rgba(57,208,160,0.15); border-color: var(--teal); color: var(--teal); }
+  .checkin-log { margin-top: 1.5rem; }
+  .log-entry {
+    background: var(--navy3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 10px;
+  }
+  .log-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .log-week { font-size: 12px; color: var(--muted); }
+  .log-score { font-family: 'DM Mono', monospace; font-size: 20px; color: var(--teal); }
+  .log-notes { font-size: 13px; color: var(--text2); line-height: 1.5; }
+
+  /* ── Chart canvas ── */
+  .chart-wrap { position: relative; height: 200px; margin-top: 1rem; }
+
+  /* ── CARS tips ── */
+  .tip-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .tip-item:last-child { border-bottom: none; }
+  .tip-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--cars);
+    background: rgba(224,92,154,0.1);
+    padding: 2px 7px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .tip-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
+
+  /* ── Global separator ── */
+  hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--navy4); border-radius: 3px; }
+
+  /* ── Divider heading ── */
+  .section-divider {
+    font-family: 'Crimson Pro', serif;
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Tooltip ── */
+  .tooltip { position: relative; cursor: help; }
+  .tooltip:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--navy3);
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 200;
+  }
+
+  /* ── Daily Card ── */
+  nav button[onclick*="dailycard"] {
+    color: var(--teal);
+    font-weight: 500;
+  }
+  .dc-topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+  .dc-topic-btn {
+    background: var(--navy3);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    line-height: 1.3;
+  }
+  .dc-topic-btn:hover { border-color: var(--border2); color: var(--text); }
+  .dc-topic-btn.selected { border-color: var(--teal); background: rgba(57,208,160,0.07); color: var(--teal); }
+  .dc-topic-btn .dc-section-tag {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+    opacity: 0.7;
+  }
+  .dc-custom-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+  .dc-custom-input input {
+    flex: 1;
+    background: var(--navy4);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 10px 14px;
+    border-radius: 8px;
+  }
+  .dc-custom-input input:focus { outline: none; border-color: var(--teal); }
+  .dc-generate-btn {
+    background: var(--teal3);
+    border: 1px solid var(--teal2);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .dc-generate-btn:hover { background: var(--teal2); }
+  .dc-generate-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .dc-card-output {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    display: none;
+  }
+  .dc-card-output.visible { display: block; }
+  .dc-card-header {
+    background: linear-gradient(90deg, var(--teal3), rgba(57,208,160,0.15));
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .dc-card-title {
+    font-family: 'Crimson Pro', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+  }
+  .dc-card-meta {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 2px;
+  }
+  .dc-card-body { padding: 1.5rem; }
+  .dc-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .dc-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .dc-section-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--teal);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .dc-section-body {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.8;
+  }
+  .dc-section-body strong { color: var(--text); font-weight: 500; }
+  .dc-section-body .highlight {
+    background: rgba(57,208,160,0.1);
+    border-left: 2px solid var(--teal);
+    padding: 8px 12px;
+    border-radius: 0 6px 6px 0;
+    margin: 8px 0;
+    font-size: 13px;
+  }
+  .dc-section-body .mnemonic {
+    background: rgba(247,162,53,0.1);
+    border: 1px solid rgba(247,162,53,0.25);
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--amber);
+  }
+  .dc-question {
+    background: var(--navy3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .dc-question:hover { border-color: var(--border2); }
+  .dc-question-text { font-size: 14px; color: var(--text); line-height: 1.5; margin-bottom: 10px; }
+  .dc-options { display: flex; flex-direction: column; gap: 6px; }
+  .dc-option {
+    font-size: 13px;
+    padding: 7px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--navy4);
+  }
+  .dc-option:hover { border-color: var(--border2); color: var(--text); }
+  .dc-option.correct { background: rgba(57,208,160,0.12); border-color: var(--teal); color: var(--teal); }
+  .dc-option.wrong { background: rgba(224,92,92,0.1); border-color: var(--red); color: var(--red); }
+  .dc-option.revealed { background: rgba(57,208,160,0.08); border-color: rgba(57,208,160,0.3); color: var(--teal); }
+  .dc-reveal-btn {
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 5px;
+    border: 1px solid var(--border2);
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.2s;
+  }
+  .dc-reveal-btn:hover { color: var(--text); }
+  .dc-explanation {
+    font-size: 13px;
+    color: var(--text2);
+    background: rgba(57,208,160,0.06);
+    border-left: 2px solid var(--teal2);
+    padding: 8px 12px;
+    border-radius: 0 6px 6px 0;
+    margin-top: 8px;
+    display: none;
+    line-height: 1.6;
+  }
+  .dc-loading {
+    display: none;
+    padding: 3rem;
+    text-align: center;
+  }
+  .dc-loading.visible { display: block; }
+  .dc-spinner {
+    width: 36px; height: 36px;
+    border: 2px solid var(--border);
+    border-top-color: var(--teal);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .dc-loading-text { font-size: 14px; color: var(--muted); }
+  .dc-loading-topic { font-family: 'Crimson Pro', serif; font-size: 18px; color: var(--teal); margin-top: 6px; }
+  .dc-history-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .dc-history-item:hover .dc-history-topic { color: var(--teal); }
+  .dc-history-item:last-child { border-bottom: none; }
+  .dc-history-topic { font-size: 13px; color: var(--text2); flex: 1; }
+  .dc-history-date { font-size: 11px; color: var(--muted); }
+  .dc-saved-badge {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    background: rgba(57,208,160,0.15);
+    color: var(--teal);
+  }
+  .dc-actions { display: flex; gap: 8px; margin-top: 1rem; flex-wrap: wrap; }
+  .dc-action-btn {
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border2);
+    background: var(--navy3);
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .dc-action-btn:hover { color: var(--text); border-color: var(--teal); }
+
+  /* ── Exam day banner ── */
+  .exam-banner {
+    background: linear-gradient(135deg, var(--teal3) 0%, var(--amber2) 100%);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .exam-banner-left h2 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 4px;
+  }
+  .exam-banner-left p { font-size: 14px; color: rgba(255,255,255,0.75); }
+  .exam-date-large {
+    font-family: 'DM Mono', monospace;
+    font-size: 42px;
+    font-weight: 500;
+    color: white;
+    line-height: 1;
+    text-align: right;
+  }
+  .exam-date-sub { font-size: 12px; color: rgba(255,255,255,0.65); text-align: right; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">MCAT Prep <span>June 12, 2026</span></div>
+  <div class="countdown-header">
+    <div class="cd-unit"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Days</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-unit"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Hrs</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-unit"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">Min</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-unit"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">Sec</div></div>
+  </div>
+</header>
+
+<nav>
+  <button class="active" onclick="switchTab('dashboard', this)">Dashboard</button>
+  <button onclick="switchTab('studyplan', this)">Study Plan</button>
+  <button onclick="switchTab('sections', this)">Sections</button>
+  <button onclick="switchTab('daily', this)">Daily Schedule</button>
+  <button onclick="switchTab('fl', this)">Full-Length Tests</button>
+  <button onclick="switchTab('checkin', this)">Weekly Check-In</button>
+  <button onclick="switchTab('dailycard', this)">✦ Daily Study Card</button>
+</nav>
+
+<main>
+
+<!-- ══════════ DASHBOARD ══════════ -->
+<div id="tab-dashboard" class="tab-content active">
+
+  <div class="exam-banner">
+    <div class="exam-banner-left">
+      <h2>You've got this.</h2>
+      <p>Track your progress, stay consistent, and trust the process.</p>
+    </div>
+    <div>
+      <div class="exam-date-large" id="banner-days">--</div>
+      <div class="exam-date-sub">days to exam day</div>
+    </div>
+  </div>
+
+  <div class="grid-4" style="margin-bottom:1.5rem;">
+    <div class="metric">
+      <div class="metric-label">Target Score</div>
+      <div class="metric-value" id="target-display">515</div>
+      <div class="metric-sub">composite</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Current Avg</div>
+      <div class="metric-value" id="current-avg">—</div>
+      <div class="metric-sub">based on scores entered</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Weeks Complete</div>
+      <div class="metric-value" id="weeks-done">0</div>
+      <div class="metric-sub">of 11 total weeks</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">FLs Taken</div>
+      <div class="metric-value" id="fl-count">0</div>
+      <div class="metric-sub">of 4 available</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span> Section Progress</div>
+      <div class="prog-row">
+        <div class="prog-header"><span class="prog-label"><span class="badge badge-cp">C/P</span> Chem/Physics</span><span class="prog-val" id="prog-cp-val">—</span></div>
+        <div class="prog-track"><div class="prog-fill fill-cp" id="prog-cp" style="width:0%"></div></div>
+      </div>
+      <div class="prog-row">
+        <div class="prog-header"><span class="prog-label"><span class="badge badge-cars">CARS</span> Critical Analysis</span><span class="prog-val" id="prog-cars-val">—</span></div>
+        <div class="prog-track"><div class="prog-fill fill-cars" id="prog-cars" style="width:0%"></div></div>
+      </div>
+      <div class="prog-row">
+        <div class="prog-header"><span class="prog-label"><span class="badge badge-bb">B/B</span> Bio/Biochem</span><span class="prog-val" id="prog-bb-val">—</span></div>
+        <div class="prog-track"><div class="prog-fill fill-bb" id="prog-bb" style="width:0%"></div></div>
+      </div>
+      <div class="prog-row">
+        <div class="prog-header"><span class="prog-label"><span class="badge badge-ps">P/S</span> Psych/Soc</span><span class="prog-val" id="prog-ps-val">—</span></div>
+        <div class="prog-track"><div class="prog-fill fill-ps" id="prog-ps" style="width:0%"></div></div>
+      </div>
+      <hr>
+      <div style="font-size:12px;color:var(--muted);">Update scores in the Sections tab to reflect progress.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">📈</span> Score Trend</div>
+      <div class="chart-wrap">
+        <canvas id="scoreChart"></canvas>
+      </div>
+      <div id="no-chart-msg" style="text-align:center;color:var(--muted);font-size:13px;margin-top:1rem;">
+        Add full-length test scores in the FL tab to see your trend.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🗺️</span> Study Phase Timeline</div>
+    <div style="position:relative;">
+      <div class="phase-bar" id="phase-bar">
+        <div class="phase-seg phase-1">Phase 1 — Foundation</div>
+        <div class="phase-seg phase-2">Phase 2 — Practice</div>
+        <div class="phase-seg phase-3">Phase 3 — Final Prep</div>
+        <div class="today-marker" id="today-marker"></div>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">PHASE 1 — Weeks 1–4</div>
+        <div style="font-size:13px;color:var(--text2);">Content review, Anki foundations, first timed passages. Build your knowledge base section by section.</div>
+      </div>
+      <div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">PHASE 2 — Weeks 5–8</div>
+        <div style="font-size:13px;color:var(--text2);">Passage-heavy practice, timed blocks, first 2 full-lengths. Close content gaps from Phase 1.</div>
+      </div>
+      <div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">PHASE 3 — Weeks 9–11</div>
+        <div style="font-size:13px;color:var(--text2);">AAMC FLs 3 & 4, targeted review, exam-day simulation. Light content, heavy strategy.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ STUDY PLAN ══════════ -->
+<div id="tab-studyplan" class="tab-content">
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📅</span> 11-Week Master Plan</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:1.5rem;">Check off weeks as you complete them. Current week is highlighted.</div>
+
+    <div class="section-divider">Phase 1 — Foundation & Content Review (Weeks 1–4)</div>
+    <div class="week-grid" id="phase1-weeks"></div>
+
+    <div class="section-divider" style="margin-top:1.5rem;">Phase 2 — Practice & Application (Weeks 5–8)</div>
+    <div class="week-grid" id="phase2-weeks"></div>
+
+    <div class="section-divider" style="margin-top:1.5rem;">Phase 3 — Full-Length & Refinement (Weeks 9–11)</div>
+    <div class="week-grid" id="phase3-weeks"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📚</span> Recommended Resources by Phase</div>
+    <div class="grid-3">
+      <div>
+        <div style="font-size:12px;color:var(--cp);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">Phase 1</div>
+        <ul style="list-style:none;font-size:13px;color:var(--text2);line-height:2;">
+          <li>🃏 AnKing / Anki MCAT Bro decks</li>
+          <li>📹 Khan Academy (free, all sections)</li>
+          <li>📘 Princeton Review content review</li>
+          <li>📝 AAMC Content Outline</li>
+          <li>🧪 Kaplan Science chapters</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:12px;color:var(--bb);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">Phase 2</div>
+        <ul style="list-style:none;font-size:13px;color:var(--text2);line-height:2;">
+          <li>🖥️ UWorld MCAT QBank</li>
+          <li>📄 AAMC Section Banks</li>
+          <li>📖 AAMC Qpacks (C/P, CARS, B/B, P/S)</li>
+          <li>🧠 CARS practice (Jack Westin daily)</li>
+          <li>📊 FL1 & FL2 (scored, full review)</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:12px;color:var(--amber);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">Phase 3</div>
+        <ul style="list-style:none;font-size:13px;color:var(--text2);line-height:2;">
+          <li>📊 AAMC FL3 & FL4 (official)</li>
+          <li>🎯 AAMC Sample Test</li>
+          <li>🔁 Targeted Anki review only</li>
+          <li>📝 Error log revisit</li>
+          <li>😴 Sleep & exam-day simulation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ SECTIONS ══════════ -->
+<div id="tab-sections" class="tab-content">
+
+  <div class="grid-2">
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-name" style="color:var(--cp)">Chemical & Physical Foundations</div>
+        <span class="badge badge-cp">C/P</span>
+      </div>
+      <div class="score-display" id="score-cp" style="color:var(--cp)">—</div>
+      <div class="score-max">out of 132</div>
+      <div class="score-input-row">
+        <input type="number" id="input-cp" placeholder="e.g. 127" min="118" max="132">
+        <button class="btn-sm" onclick="updateScore('cp')">Save</button>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:var(--muted);margin-bottom:4px;">Confidence level:</div>
+      <div class="confidence-row">
+        <button class="conf-btn" id="conf-cp-1" onclick="setConf('cp',1)">Low</button>
+        <button class="conf-btn" id="conf-cp-2" onclick="setConf('cp',2)">Medium</button>
+        <button class="conf-btn" id="conf-cp-3" onclick="setConf('cp',3)">High</button>
+      </div>
+      <div style="margin-top:12px;">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">High-yield topics:</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.7;">Amino acids · Enzyme kinetics · Thermodynamics · Circuits · Fluids · Optics · Acids/bases · Electrochemistry</div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-name" style="color:var(--cars)">Critical Analysis & Reasoning</div>
+        <span class="badge badge-cars">CARS</span>
+      </div>
+      <div class="score-display" id="score-cars" style="color:var(--cars)">—</div>
+      <div class="score-max">out of 132</div>
+      <div class="score-input-row">
+        <input type="number" id="input-cars" placeholder="e.g. 128" min="118" max="132">
+        <button class="btn-sm" onclick="updateScore('cars')">Save</button>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:var(--muted);margin-bottom:4px;">Confidence level:</div>
+      <div class="confidence-row">
+        <button class="conf-btn" id="conf-cars-1" onclick="setConf('cars',1)">Low</button>
+        <button class="conf-btn" id="conf-cars-2" onclick="setConf('cars',2)">Medium</button>
+        <button class="conf-btn" id="conf-cars-3" onclick="setConf('cars',3)">High</button>
+      </div>
+      <div style="margin-top:12px;">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Strategy focus:</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.7;">Main idea first · Active annotation · Author tone · Evidence evaluation · 1 passage/day minimum</div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-name" style="color:var(--bb)">Biological & Biochemical Foundations</div>
+        <span class="badge badge-bb">B/B</span>
+      </div>
+      <div class="score-display" id="score-bb" style="color:var(--bb)">—</div>
+      <div class="score-max">out of 132</div>
+      <div class="score-input-row">
+        <input type="number" id="input-bb" placeholder="e.g. 128" min="118" max="132">
+        <button class="btn-sm" onclick="updateScore('bb')">Save</button>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:var(--muted);margin-bottom:4px;">Confidence level:</div>
+      <div class="confidence-row">
+        <button class="conf-btn" id="conf-bb-1" onclick="setConf('bb',1)">Low</button>
+        <button class="conf-btn" id="conf-bb-2" onclick="setConf('bb',2)">Medium</button>
+        <button class="conf-btn" id="conf-bb-3" onclick="setConf('bb',3)">High</button>
+      </div>
+      <div style="margin-top:12px;">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">High-yield topics:</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.7;">DNA replication/repair · Protein synthesis · Cell signaling · Metabolism · Genetics · Immune system · Pharmacokinetics</div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-name" style="color:var(--ps)">Psychological, Social & Biological</div>
+        <span class="badge badge-ps">P/S</span>
+      </div>
+      <div class="score-display" id="score-ps" style="color:var(--ps)">—</div>
+      <div class="score-max">out of 132</div>
+      <div class="score-input-row">
+        <input type="number" id="input-ps" placeholder="e.g. 130" min="118" max="132">
+        <button class="btn-sm" onclick="updateScore('ps')">Save</button>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:var(--muted);margin-bottom:4px;">Confidence level:</div>
+      <div class="confidence-row">
+        <button class="conf-btn" id="conf-ps-1" onclick="setConf('ps',1)">Low</button>
+        <button class="conf-btn" id="conf-ps-2" onclick="setConf('ps',2)">Medium</button>
+        <button class="conf-btn" id="conf-ps-3" onclick="setConf('ps',3)">High</button>
+      </div>
+      <div style="margin-top:12px;">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">High-yield topics:</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.7;">Classical/operant conditioning · Memory models · Social identity · Socialization · Health disparities · Theories of development</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🎯</span> CARS Deep Dive Strategy</div>
+    <div class="tip-item">
+      <span class="tip-num">01</span>
+      <div class="tip-text"><strong style="color:var(--text);">Read for the author's argument, not facts.</strong> CARS is never about remembering details — it's about understanding why the author wrote the passage and what they're trying to prove.</div>
+    </div>
+    <div class="tip-item">
+      <span class="tip-num">02</span>
+      <div class="tip-text"><strong style="color:var(--text);">Annotate actively with a 3-symbol system:</strong> "?" for confusing parts, "!" for strong claims, "→" for transitions/conclusions. Keep it under 5 seconds per paragraph.</div>
+    </div>
+    <div class="tip-item">
+      <span class="tip-num">03</span>
+      <div class="tip-text"><strong style="color:var(--text);">Attack question stems, not passage first.</strong> Read the question before going back. Know exactly what you're hunting for before you scan.</div>
+    </div>
+    <div class="tip-item">
+      <span class="tip-num">04</span>
+      <div class="tip-text"><strong style="color:var(--text);">Eliminate extreme language answers.</strong> Correct answers are often hedged ("may suggest," "tends to"). Wrong answers often say "always," "never," "proves," "disproves."</div>
+    </div>
+    <div class="tip-item">
+      <span class="tip-num">05</span>
+      <div class="tip-text"><strong style="color:var(--text);">Practice 1 passage per day, every day — non-negotiable.</strong> Use Jack Westin free daily CARS. Don't skip even on easy days. Consistency is the only thing that moves CARS scores.</div>
+    </div>
+    <div class="tip-item">
+      <span class="tip-num">06</span>
+      <div class="tip-text"><strong style="color:var(--text);">Pace at 8.5 minutes per passage.</strong> 9 passages × ~8.5 min = 76.5 min (leaves buffer). Flag and move — never spend more than 90 seconds on one question.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ DAILY SCHEDULE ══════════ -->
+<div id="tab-daily" class="tab-content">
+
+  <div class="card">
+    <div class="card-title"><span class="icon">⏰</span> Daily Study Template <span style="font-size:13px;color:var(--muted);font-family:'DM Sans';font-weight:400;margin-left:8px;">(6-hour day)</span></div>
+
+    <div class="schedule-block">
+      <div class="sched-time">6:00 AM</div>
+      <div class="sched-dot" style="background:var(--amber)"></div>
+      <div class="sched-info">
+        <div class="sched-title">Morning Ritual & Warm-Up</div>
+        <div class="sched-desc">10 min journaling intention · 5 min review yesterday's error log · 10 min light Anki review (due cards only)</div>
+      </div>
+      <div class="sched-duration">25 min</div>
+      <button class="timer-btn" onclick="startTimer(this, 25)">▶ Start</button>
+    </div>
+
+    <div class="schedule-block">
+      <div class="sched-time">6:30 AM</div>
+      <div class="sched-dot" style="background:var(--cp)"></div>
+      <div class="sched-info">
+        <div class="sched-title">Content Review Block</div>
+        <div class="sched-desc">Focus on today's scheduled topic. Read actively, make summary notes, draw diagrams. No passive reading.</div>
+      </div>
+      <div class="sched-duration">90 min</div>
+      <button class="timer-btn" onclick="startTimer(this, 90)">▶ Start</button>
+    </div>
+
+    <div class="schedule-block">
+      <div class="sched-time">8:00 AM</div>
+      <div class="sched-dot" style="background:var(--teal)"></div>
+      <div class="sched-info">
+        <div class="sched-title">Anki Deep Session</div>
+        <div class="sched-desc">New cards from today's content + due reviews. Aim: 100–150 cards/session in Phase 1; 200+ in Phase 2.</div>
+      </div>
+      <div class="sched-duration">45 min</div>
+      <button class="timer-btn" onclick="startTimer(this, 45)">▶ Start</button>
+    </div>
+
+    <div class="schedule-block">
+      <div class="sched-time">8:45 AM</div>
+      <div class="sched-dot" style="background:var(--navy4)"></div>
+      <div class="sched-info">
+        <div class="sched-title">Break — Move & Eat</div>
+        <div class="sched-desc">Physical movement required — walk, stretch, workout. Eat a real meal. No screens for at least 15 minutes.</div>
+      </div>
+      <div class="sched-duration">45 min</div>
+      <button class="timer-btn" onclick="startTimer(this, 45)">▶ Start</button>
+    </div>
+
+    <div class="schedule-block">
+      <div class="sched-time">9:30 AM</div>
+      <div class="sched-dot" style="background:var(--cars)"></div>
+      <div class="sched-info">
+        <div class="sched-title">CARS Passage Practice</div>
+        <div class="sched-desc">1 timed passage (8.5 min) + full review. Track: time spent, accuracy, question type errors. Use Jack Westin daily passage.</div>
+      </div>
+      <div class="sched-duration">30 min</div>
+      <button class="timer-btn" onclick="startTimer(this, 30)">▶ Start</button>
+    </div>
+
+    <div class="schedule-block">
+      <div class="sched-time">10:00 AM</div>
+      <div class="sched-dot" style="background:var(--bb)"></div>
+      <div class="sched-info">
+        <div class="sched-title">Timed Practice Block</div>
+        <div class="sched-desc">UWorld or AAMC discrete questions on today's topic. Do FULL blocks — no stopping mid-set. Simulate test conditions.</div>
+      </div>
+      <div class="sched-duration">90 min</div>
+      <button class="timer-btn" onclick="startTimer(this, 90)">▶ Start</button>
+    </div>
+
+    <div class="schedule-block">
+      <div class="sched-time">11:30 AM</div>
+      <div class="sched-dot" style="background:var(--red)"></div>
+      <div class="sched-info">
+        <div class="sched-title">Error Log Review — CRITICAL</div>
+        <div class="sched-desc">Review every wrong answer. For each: WHY was I wrong? What concept was tested? Add Anki card if needed. This is the most important block.</div>
+      </div>
+      <div class="sched-duration">60 min</div>
+      <button class="timer-btn" onclick="startTimer(this, 60)">▶ Start</button>
+    </div>
+
+    <div class="schedule-block">
+      <div class="sched-time">12:30 PM</div>
+      <div class="sched-dot" style="background:var(--navy4)"></div>
+      <div class="sched-info">
+        <div class="sched-title">Lunch Break</div>
+        <div class="sched-desc">Full stop. Eat, rest, social time. Protect this break — it makes the afternoon session effective.</div>
+      </div>
+      <div class="sched-duration">60 min</div>
+    </div>
+
+    <div class="schedule-block">
+      <div class="sched-time">1:30 PM</div>
+      <div class="sched-dot" style="background:var(--ps)"></div>
+      <div class="sched-info">
+        <div class="sched-title">Second Content or Passage Block</div>
+        <div class="sched-desc">Phase 1: second content topic. Phase 2+: full passage set (3–4 passages timed). Focus on weakest section today.</div>
+      </div>
+      <div class="sched-duration">90 min</div>
+      <button class="timer-btn" onclick="startTimer(this, 90)">▶ Start</button>
+    </div>
+
+    <div class="schedule-block">
+      <div class="sched-time">3:00 PM</div>
+      <div class="sched-dot" style="background:var(--amber)"></div>
+      <div class="sched-info">
+        <div class="sched-title">Evening Wind-Down</div>
+        <div class="sched-desc">Final Anki review (due cards) · update today's error log · set tomorrow's intentions · 5 min reflection. No new content after 5 PM.</div>
+      </div>
+      <div class="sched-duration">30 min</div>
+      <button class="timer-btn" onclick="startTimer(this, 30)">▶ Start</button>
+    </div>
+
+    <hr>
+    <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+      <strong style="color:var(--text2);">Rest day (1x/week):</strong> Anki reviews only (30 min max), physical activity, no content. Mental reset is non-negotiable.<br>
+      <strong style="color:var(--text2);">FL days:</strong> Full-length test in morning (7.5 hrs with breaks). Full review the following day — never rush review.
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ FULL-LENGTH TESTS ══════════ -->
+<div id="tab-fl" class="tab-content">
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📝</span> Full-Length Test Tracker</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:1.5rem;">Enter your scores after each full-length. Save updates the score trend chart.</div>
+
+    <div style="display:grid;grid-template-columns:80px 90px 1fr 80px 90px;gap:8px;padding:8px 0;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid var(--border);">
+      <div>Test</div>
+      <div>Composite</div>
+      <div>C/P — CARS — B/B — P/S</div>
+      <div>Date</div>
+      <div>Status</div>
+    </div>
+
+    <div id="fl-rows"></div>
+
+    <div style="margin-top:1.5rem;display:flex;justify-content:flex-end;">
+      <button class="btn-primary" onclick="saveFL()">Save All Scores</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📐</span> Full-Length Review Protocol</div>
+    <div style="font-size:13px;color:var(--text2);line-height:1.8;">
+      <strong style="color:var(--teal);">Day 1 — Take the exam.</strong> Simulate real conditions. Start at 8 AM. Wear the same clothes you plan to wear on test day. Take every break. Eat the same food. This builds familiarity with the physical experience.<br><br>
+      <strong style="color:var(--teal);">Day 2 — Full review (4–6 hrs minimum).</strong> Every wrong answer, every flagged answer, every answer you got right but weren't sure about. Ask: What concept was tested? What trap did I fall for? Would I get this right again tomorrow?<br><br>
+      <strong style="color:var(--teal);">Day 3 — Anki creation & targeted review.</strong> Add new cards for any concept you missed. Re-read the relevant content chapter. Do 20 discrete questions in that area.
+    </div>
+    <hr>
+    <div class="grid-4">
+      <div class="metric">
+        <div class="metric-label">Recommended</div>
+        <div class="metric-value" style="font-size:18px;">FL1–FL2</div>
+        <div class="metric-sub">Weeks 5–6 (Phase 2)</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Recommended</div>
+        <div class="metric-value" style="font-size:18px;">FL3</div>
+        <div class="metric-sub">Week 9 (Phase 3)</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Recommended</div>
+        <div class="metric-value" style="font-size:18px;">FL4</div>
+        <div class="metric-sub">Week 10 (Phase 3)</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Final week</div>
+        <div class="metric-value" style="font-size:18px;">Rest</div>
+        <div class="metric-sub">No FLs in week 11</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ WEEKLY CHECK-IN ══════════ -->
+<div id="tab-checkin" class="tab-content">
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📋</span> Weekly Check-In</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:1.5rem;">Complete every Sunday. Be honest — this data guides next week's adjustments.</div>
+
+    <div class="checkin-form">
+      <div class="form-group">
+        <label>Week Number</label>
+        <input type="number" id="ci-week" placeholder="e.g. 3" min="1" max="11">
+      </div>
+      <div class="form-group">
+        <label>Practice Score (if applicable)</label>
+        <input type="number" id="ci-score" placeholder="e.g. 512" min="472" max="528">
+      </div>
+      <div class="form-group">
+        <label>Topics Covered</label>
+        <input type="text" id="ci-topics" placeholder="e.g. Biochem, amino acids, CARS 4 passages">
+      </div>
+      <div class="form-group">
+        <label>Weakest Area This Week</label>
+        <select id="ci-weak">
+          <option value="">— Select section —</option>
+          <option>C/P — Chemistry / Physics</option>
+          <option>CARS — Critical Reasoning</option>
+          <option>B/B — Biology / Biochem</option>
+          <option>P/S — Psych / Soc</option>
+          <option>Multiple areas</option>
+        </select>
+      </div>
+      <div class="form-group" style="grid-column:1/-1;">
+        <label>Notes / Observations</label>
+        <textarea id="ci-notes" rows="3" placeholder="What worked? What didn't? Where did you lose time? What do you need to focus on next week?"></textarea>
+      </div>
+      <div class="form-group" style="grid-column:1/-1;">
+        <label>Energy & Confidence Level</label>
+        <div class="energy-btns" id="energy-btns">
+          <button class="energy-btn" onclick="setEnergy(1)">😓 1</button>
+          <button class="energy-btn" onclick="setEnergy(2)">😐 2</button>
+          <button class="energy-btn" onclick="setEnergy(3)">🙂 3</button>
+          <button class="energy-btn" onclick="setEnergy(4)">😊 4</button>
+          <button class="energy-btn" onclick="setEnergy(5)">🔥 5</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;margin-top:1rem;">
+      <button class="btn-primary" onclick="saveCheckin()">Save Check-In →</button>
+    </div>
+  </div>
+
+  <div class="card" id="checkin-history-card">
+    <div class="card-title"><span class="icon">📜</span> Check-In History</div>
+    <div id="checkin-log">
+      <div style="text-align:center;padding:2rem;color:var(--muted);font-size:13px;">No check-ins recorded yet. Complete your first Sunday review above.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ DAILY STUDY CARD ══════════ -->
+<div id="tab-dailycard" class="tab-content">
+
+  <div class="card">
+    <div class="card-title"><span class="icon">✦</span> Daily Study Card Generator <span style="font-size:12px;color:var(--teal);background:rgba(57,208,160,0.1);padding:3px 10px;border-radius:20px;margin-left:8px;font-weight:400;">AI-Powered</span></div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:1.5rem;">Choose a topic below or type your own. Claude will generate a focused study card with key concepts, mnemonics, and practice questions.</div>
+
+    <div class="section-divider">Quick-Select by Section</div>
+
+    <div style="margin-bottom:1rem;">
+      <span class="badge badge-cp" style="margin-right:6px;">C/P Topics</span>
+    </div>
+    <div class="dc-topic-grid" id="topics-cp"></div>
+
+    <div style="margin-bottom:1rem;margin-top:0.5rem;">
+      <span class="badge badge-cars" style="margin-right:6px;">CARS Topics</span>
+    </div>
+    <div class="dc-topic-grid" id="topics-cars"></div>
+
+    <div style="margin-bottom:1rem;margin-top:0.5rem;">
+      <span class="badge badge-bb" style="margin-right:6px;">B/B Topics</span>
+    </div>
+    <div class="dc-topic-grid" id="topics-bb"></div>
+
+    <div style="margin-bottom:1rem;margin-top:0.5rem;">
+      <span class="badge badge-ps" style="margin-right:6px;">P/S Topics</span>
+    </div>
+    <div class="dc-topic-grid" id="topics-ps"></div>
+
+    <hr>
+    <div id="dc-apikey-banner" style="background:rgba(247,162,53,0.08);border:1px solid rgba(247,162,53,0.25);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:200px;">
+        <div style="font-size:12px;color:var(--amber);font-weight:500;margin-bottom:4px;">⚙ Anthropic API Key Required</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5;">Get a free key at <a href="https://console.anthropic.com" target="_blank" style="color:var(--teal);">console.anthropic.com</a> → API Keys. Stored only in your browser, never sent anywhere else.</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;">
+        <input type="password" id="dc-apikey-input" placeholder="sk-ant-..." style="background:var(--navy4);border:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:8px 12px;border-radius:7px;width:220px;">
+        <button onclick="saveApiKey()" style="background:var(--amber2);border:1px solid var(--amber);color:white;font-family:'DM Sans',sans-serif;font-size:13px;padding:8px 14px;border-radius:7px;cursor:pointer;white-space:nowrap;">Save Key</button>
+      </div>
+    </div>
+    <div id="dc-apikey-ok" style="display:none;background:rgba(57,208,160,0.08);border:1px solid rgba(57,208,160,0.2);border-radius:10px;padding:10px 1.25rem;margin-bottom:1.25rem;display:none;align-items:center;justify-content:space-between;">
+      <span style="font-size:13px;color:var(--teal);">✓ API key saved — ready to generate cards</span>
+      <button onclick="clearApiKey()" style="font-size:11px;background:none;border:none;color:var(--muted);cursor:pointer;text-decoration:underline;">Remove</button>
+    </div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:10px;">Or type any topic:</div>
+    <div class="dc-custom-input">
+      <input type="text" id="dc-custom" placeholder="e.g. Michaelis-Menten kinetics, VSEPR theory, Cognitive dissonance..." />
+      <button class="dc-generate-btn" id="dc-gen-btn" onclick="generateCard()">Generate Card ✦</button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="dc-loading" id="dc-loading">
+    <div class="dc-spinner"></div>
+    <div class="dc-loading-text">Generating your study card for</div>
+    <div class="dc-loading-topic" id="dc-loading-topic">—</div>
+  </div>
+
+  <!-- Error Box -->
+  <div id="dc-error-box" style="display:none;background:rgba(224,92,92,0.1);border:1px solid rgba(224,92,92,0.3);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem;font-size:13px;color:var(--red);line-height:1.6;"></div>
+
+  <!-- Output Card -->
+  <div class="dc-card-output" id="dc-output">
+    <div class="dc-card-header">
+      <div>
+        <div class="dc-card-title" id="dc-out-title">—</div>
+        <div class="dc-card-meta" id="dc-out-meta">—</div>
+      </div>
+      <span class="badge" id="dc-out-section" style="font-size:12px;padding:4px 12px;">—</span>
+    </div>
+    <div class="dc-card-body" id="dc-out-body"></div>
+    <div style="padding:0 1.5rem 1.5rem;">
+      <div class="dc-actions">
+        <button class="dc-action-btn" onclick="saveCard()">⭐ Save Card</button>
+        <button class="dc-action-btn" onclick="generateCard()">↺ Regenerate</button>
+        <button class="dc-action-btn" onclick="document.getElementById('dc-custom').focus()">+ New Topic</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Saved Cards -->
+  <div class="card" id="dc-saved-section" style="display:none;">
+    <div class="card-title"><span class="icon">⭐</span> Saved Cards</div>
+    <div id="dc-saved-list"></div>
+  </div>
+
+</div>
+
+</main>
+
+<script>
+// ── EXAM DATE ──
+const EXAM = new Date('2026-06-12T08:00:00');
+const START = new Date('2026-03-27T00:00:00');
+const TOTAL_DAYS = Math.round((EXAM - START) / 86400000);
+
+// ── COUNTDOWN ──
+function updateCountdown() {
+  const now = new Date();
+  const diff = EXAM - now;
+  if (diff <= 0) {
+    document.querySelectorAll('.cd-num').forEach(e => e.textContent = '00');
+    return;
+  }
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  const secs = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+  document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+  document.getElementById('banner-days').textContent = days;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// ── STATE ──
+let state = JSON.parse(localStorage.getItem('mcat_state') || '{}');
+if (!state.scores) state.scores = { cp: null, cars: null, bb: null, ps: null };
+if (!state.conf) state.conf = { cp: 0, cars: 0, bb: 0, ps: 0 };
+if (!state.weeks) state.weeks = {};
+if (!state.fl) state.fl = [
+  { name:'FL 1', composite:'', cp:'', cars:'', bb:'', ps:'', date:'', done:false },
+  { name:'FL 2', composite:'', cp:'', cars:'', bb:'', ps:'', date:'', done:false },
+  { name:'FL 3', composite:'', cp:'', cars:'', bb:'', ps:'', date:'', done:false },
+  { name:'FL 4', composite:'', cp:'', cars:'', bb:'', ps:'', date:'', done:false }
+];
+if (!state.checkins) state.checkins = [];
+if (!state.energy) state.energy = 0;
+function save() { localStorage.setItem('mcat_state', JSON.stringify(state)); }
+
+// ── TABS ──
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── TODAY MARKER ──
+function setTodayMarker() {
+  const now = new Date();
+  const elapsed = (now - START) / (EXAM - START);
+  const pct = Math.min(Math.max(elapsed, 0), 1) * 100;
+  const m = document.getElementById('today-marker');
+  if (m) m.style.left = pct + '%';
+}
+setTodayMarker();
+
+// ── WEEK PLAN DATA ──
+const weeks = [
+  { n:1, phase:1, theme:'Biology & Biochemistry Foundations', focus:'Cell biology, DNA replication, transcription, translation, enzyme kinetics. 40 new Anki cards/day.' },
+  { n:2, phase:1, theme:'Biochemistry & Metabolism', focus:'Amino acids, protein structure, glycolysis, TCA cycle, oxidative phosphorylation. First CARS passage daily.' },
+  { n:3, phase:1, theme:'Chemistry & Physics I', focus:'General chemistry: thermodynamics, equilibrium, acids/bases. Physics: forces, energy, fluids, circuits.' },
+  { n:4, phase:1, theme:'Psych/Soc & Chemistry II', focus:'All P/S high-yield: conditioning, memory, social structures. Organic chemistry: stereochemistry, reactions.' },
+  { n:5, phase:2, theme:'First Full-Length + Review', focus:'FL1 on day 1, full 2-day review. Identify major weak areas. Switch to passage-heavy UWorld blocks.' },
+  { n:6, phase:2, theme:'Targeted Weak Section Blitz', focus:'4 hours/day on your lowest-scoring section. FL2 at end of week. Continue CARS daily.' },
+  { n:7, phase:2, theme:'AAMC Section Banks', focus:'All 4 AAMC section banks (ranked most reliable). Full timed conditions. Deep error log review.' },
+  { n:8, phase:2, theme:'Passage Mastery & Qpacks', focus:'AAMC Qpacks C/P and B/B. Reduce new Anki; focus on due reviews. Simulate test pacing.' },
+  { n:9, phase:3, theme:'Full-Length 3 + Strategy Shift', focus:'FL3 (AAMC official). Shift to 80% review, 20% practice. Lock in question strategies.' },
+  { n:10, phase:3, theme:'Full-Length 4 + Final Review', focus:'FL4 (AAMC official). Review 2 days. Target last remaining content gaps only.' },
+  { n:11, phase:3, theme:'Exam Week — Light & Confident', focus:'Anki reviews only. No new content. Sleep 8+ hrs. Visualize exam day. Trust your preparation.' },
+];
+
+function buildWeekPlan() {
+  const containers = { 1: 'phase1-weeks', 2: 'phase2-weeks', 3: 'phase3-weeks' };
+  [1,2,3].forEach(p => document.getElementById(containers[p]).innerHTML = '');
+
+  const now = new Date();
+  const elapsedWeeks = Math.floor((now - START) / (7 * 86400000));
+
+  weeks.forEach(w => {
+    const isDone = state.weeks[w.n] === true;
+    const isCurrent = w.n === elapsedWeeks + 1;
+    const div = document.createElement('div');
+    div.className = 'week-card' + (isCurrent ? ' current' : '') + (isDone ? ' done' : '');
+    div.innerHTML = `
+      <div class="week-card-header">
+        <span class="week-num">WEEK ${w.n}</span>
+        <button class="week-done-toggle ${isDone ? 'checked' : ''}" onclick="toggleWeek(${w.n}, this)">✓</button>
+      </div>
+      <div class="week-theme">${w.theme}</div>
+      <div class="week-focus">${w.focus}</div>
+    `;
+    document.getElementById(containers[w.phase]).appendChild(div);
+  });
+}
+
+function toggleWeek(n, btn) {
+  state.weeks[n] = !state.weeks[n];
+  btn.classList.toggle('checked', state.weeks[n]);
+  btn.closest('.week-card').classList.toggle('done', state.weeks[n]);
+  save();
+  updateDashboard();
+}
+
+// ── SCORES ──
+function updateScore(sec) {
+  const val = parseInt(document.getElementById('input-' + sec).value);
+  if (val >= 118 && val <= 132) {
+    state.scores[sec] = val;
+    save();
+    renderScores();
+    updateDashboard();
+  }
+}
+
+function renderScores() {
+  ['cp','cars','bb','ps'].forEach(s => {
+    const el = document.getElementById('score-' + s);
+    const v = state.scores[s];
+    el.textContent = v ? v : '—';
+    const pct = v ? Math.round(((v - 118) / (132 - 118)) * 100) : 0;
+    document.getElementById('prog-' + s).style.width = pct + '%';
+    document.getElementById('prog-' + s + '-val').textContent = v ? v : '—';
+  });
+}
+
+function setConf(sec, level) {
+  state.conf[sec] = level;
+  save();
+  [1,2,3].forEach(i => {
+    const btn = document.getElementById('conf-' + sec + '-' + i);
+    btn.className = 'conf-btn';
+    if (i === level) {
+      btn.classList.add(i===1 ? 'active-low' : i===2 ? 'active-mid' : 'active-high');
+    }
+  });
+}
+
+function renderConf() {
+  ['cp','cars','bb','ps'].forEach(sec => {
+    if (state.conf[sec]) setConf(sec, state.conf[sec]);
+  });
+}
+
+// ── DASHBOARD ──
+function updateDashboard() {
+  const scores = Object.values(state.scores).filter(Boolean);
+  const avg = scores.length ? Math.round(scores.reduce((a,b) => a+b, 0) / scores.length * (528/132)) : null;
+  document.getElementById('current-avg').textContent = avg ? Math.round(avg) : '—';
+  document.getElementById('weeks-done').textContent = Object.values(state.weeks).filter(Boolean).length;
+  document.getElementById('fl-count').textContent = state.fl.filter(f => f.done).length;
+  renderScores();
+}
+
+// ── FL TRACKER ──
+function buildFL() {
+  const container = document.getElementById('fl-rows');
+  container.innerHTML = '';
+  state.fl.forEach((f, i) => {
+    const row = document.createElement('div');
+    row.className = 'fl-row';
+    row.innerHTML = `
+      <div class="fl-name">${f.name}</div>
+      <input class="fl-score-input" type="number" placeholder="—" value="${f.composite}" min="472" max="528" id="fl-comp-${i}" onchange="updateFL(${i})">
+      <div class="fl-section-scores">
+        <input class="fl-sec-score" type="number" placeholder="C/P" value="${f.cp}" min="118" max="132" id="fl-cp-${i}" title="C/P" onchange="updateFL(${i})">
+        <input class="fl-sec-score" type="number" placeholder="CARS" value="${f.cars}" min="118" max="132" id="fl-cars-${i}" title="CARS" onchange="updateFL(${i})">
+        <input class="fl-sec-score" type="number" placeholder="B/B" value="${f.bb}" min="118" max="132" id="fl-bb-${i}" title="B/B" onchange="updateFL(${i})">
+        <input class="fl-sec-score" type="number" placeholder="P/S" value="${f.ps}" min="118" max="132" id="fl-ps-${i}" title="P/S" onchange="updateFL(${i})">
+      </div>
+      <input class="fl-date" type="date" value="${f.date}" id="fl-date-${i}" style="background:var(--navy4);border:1px solid var(--border);color:var(--muted);padding:4px 6px;border-radius:5px;font-size:12px;" onchange="updateFL(${i})">
+      <span class="fl-status ${f.done ? 'fl-done' : 'fl-pending'}" id="fl-status-${i}">${f.done ? 'Done' : 'Pending'}</span>
+    `;
+    container.appendChild(row);
+  });
+}
+
+function updateFL(i) {
+  state.fl[i].composite = document.getElementById('fl-comp-' + i).value;
+  state.fl[i].cp = document.getElementById('fl-cp-' + i).value;
+  state.fl[i].cars = document.getElementById('fl-cars-' + i).value;
+  state.fl[i].bb = document.getElementById('fl-bb-' + i).value;
+  state.fl[i].ps = document.getElementById('fl-ps-' + i).value;
+  state.fl[i].date = document.getElementById('fl-date-' + i).value;
+  state.fl[i].done = !!state.fl[i].composite;
+  document.getElementById('fl-status-' + i).className = 'fl-status ' + (state.fl[i].done ? 'fl-done' : 'fl-pending');
+  document.getElementById('fl-status-' + i).textContent = state.fl[i].done ? 'Done' : 'Pending';
+}
+
+function saveFL() {
+  save();
+  updateDashboard();
+  renderChart();
+  alert('Scores saved!');
+}
+
+// ── CHART ──
+let scoreChartInst = null;
+function renderChart() {
+  const ctx = document.getElementById('scoreChart');
+  const completed = state.fl.filter(f => f.composite && f.date);
+  const noMsg = document.getElementById('no-chart-msg');
+  if (!completed.length) {
+    noMsg.style.display = 'block';
+    ctx.style.display = 'none';
+    return;
+  }
+  noMsg.style.display = 'none';
+  ctx.style.display = 'block';
+  completed.sort((a,b) => new Date(a.date) - new Date(b.date));
+  const labels = completed.map(f => f.name);
+  const data = completed.map(f => parseInt(f.composite));
+  if (scoreChartInst) scoreChartInst.destroy();
+  scoreChartInst = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Composite Score',
+        data,
+        borderColor: '#39d0a0',
+        backgroundColor: 'rgba(57,208,160,0.1)',
+        tension: 0.3,
+        pointBackgroundColor: '#39d0a0',
+        pointRadius: 5,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: {
+          min: 490,
+          max: 528,
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          ticks: { color: '#8b949e', font: { family: 'DM Mono' } }
+        },
+        x: {
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          ticks: { color: '#8b949e', font: { family: 'DM Mono' } }
+        }
+      }
+    }
+  });
+}
+
+// ── CHECK-IN ──
+let energyVal = 0;
+function setEnergy(n) {
+  energyVal = n;
+  document.querySelectorAll('.energy-btn').forEach((b,i) => {
+    b.classList.toggle('selected', i + 1 <= n);
+  });
+}
+
+function saveCheckin() {
+  const week = document.getElementById('ci-week').value;
+  const score = document.getElementById('ci-score').value;
+  const topics = document.getElementById('ci-topics').value;
+  const weak = document.getElementById('ci-weak').value;
+  const notes = document.getElementById('ci-notes').value;
+  if (!week) { alert('Please enter a week number.'); return; }
+
+  const entry = {
+    week: parseInt(week),
+    score: score || null,
+    topics,
+    weak,
+    notes,
+    energy: energyVal,
+    date: new Date().toLocaleDateString()
+  };
+  state.checkins.unshift(entry);
+  save();
+  renderCheckins();
+  document.getElementById('ci-week').value = '';
+  document.getElementById('ci-score').value = '';
+  document.getElementById('ci-topics').value = '';
+  document.getElementById('ci-notes').value = '';
+  energyVal = 0;
+  document.querySelectorAll('.energy-btn').forEach(b => b.classList.remove('selected'));
+}
+
+function renderCheckins() {
+  const container = document.getElementById('checkin-log');
+  if (!state.checkins.length) {
+    container.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--muted);font-size:13px;">No check-ins recorded yet.</div>';
+    return;
+  }
+  container.innerHTML = state.checkins.map(c => `
+    <div class="log-entry">
+      <div class="log-entry-header">
+        <div>
+          <span style="font-size:13px;color:var(--text);font-weight:500;">Week ${c.week}</span>
+          <span style="color:var(--muted);font-size:12px;margin-left:8px;">${c.date}</span>
+          ${c.weak ? `<span class="badge badge-amber" style="margin-left:8px;">${c.weak.split('—')[0].trim()}</span>` : ''}
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          ${c.energy ? `<span style="font-size:13px;">${'🔥'.repeat(c.energy)}</span>` : ''}
+          ${c.score ? `<span class="log-score">${c.score}</span>` : ''}
+        </div>
+      </div>
+      ${c.topics ? `<div style="font-size:12px;color:var(--muted);margin-bottom:4px;">📚 ${c.topics}</div>` : ''}
+      ${c.notes ? `<div class="log-notes">${c.notes}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+// ── TIMER ──
+const timers = {};
+function startTimer(btn, minutes) {
+  const id = btn.dataset.timerId || Math.random().toString(36).slice(2);
+  btn.dataset.timerId = id;
+  if (timers[id]) {
+    clearInterval(timers[id].interval);
+    delete timers[id];
+    btn.textContent = '▶ Start';
+    const display = btn.nextElementSibling;
+    if (display && display.classList.contains('timer-display')) display.style.display = 'none';
+    return;
+  }
+  let sec = minutes * 60;
+  btn.textContent = '⏹ Stop';
+  let display = btn.nextElementSibling;
+  if (!display || !display.classList.contains('timer-display')) {
+    display = document.createElement('div');
+    display.className = 'timer-display';
+    btn.after(display);
+  }
+  display.style.display = 'block';
+  function tick() {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    display.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if (sec <= 0) {
+      clearInterval(timers[id].interval);
+      delete timers[id];
+      btn.textContent = '✓ Done';
+      display.textContent = 'Time\'s up!';
+      display.style.color = 'var(--green)';
+      return;
+    }
+    sec--;
+  }
+  tick();
+  timers[id] = { interval: setInterval(tick, 1000) };
+}
+
+// ── DAILY CARD ──
+const DC_TOPICS = {
+  cp: [
+    { label: 'Amino Acids & Structure', tag: 'C/P' },
+    { label: 'Enzyme Kinetics', tag: 'C/P' },
+    { label: 'Acid-Base Chemistry', tag: 'C/P' },
+    { label: 'Thermodynamics', tag: 'C/P' },
+    { label: 'Electrochemistry', tag: 'C/P' },
+    { label: 'Circuits & Electricity', tag: 'C/P' },
+    { label: 'Fluid Mechanics', tag: 'C/P' },
+    { label: 'Optics & Light', tag: 'C/P' },
+    { label: 'Organic Reactions', tag: 'C/P' },
+    { label: 'Stereochemistry', tag: 'C/P' },
+    { label: 'Spectroscopy (NMR/IR)', tag: 'C/P' },
+    { label: 'Equilibrium Constants', tag: 'C/P' },
+  ],
+  cars: [
+    { label: 'Main Idea Questions', tag: 'CARS' },
+    { label: 'Author Tone & Purpose', tag: 'CARS' },
+    { label: 'Inference Questions', tag: 'CARS' },
+    { label: 'Strengthen/Weaken', tag: 'CARS' },
+    { label: 'Passage Annotation Strategy', tag: 'CARS' },
+    { label: 'Eliminate Wrong Answers', tag: 'CARS' },
+  ],
+  bb: [
+    { label: 'DNA Replication & Repair', tag: 'B/B' },
+    { label: 'Transcription & Translation', tag: 'B/B' },
+    { label: 'Cell Signaling Pathways', tag: 'B/B' },
+    { label: 'Cellular Respiration', tag: 'B/B' },
+    { label: 'Genetics & Inheritance', tag: 'B/B' },
+    { label: 'Immune System', tag: 'B/B' },
+    { label: 'Endocrine System', tag: 'B/B' },
+    { label: 'Nervous System', tag: 'B/B' },
+    { label: 'Pharmacokinetics', tag: 'B/B' },
+    { label: 'Molecular Techniques (PCR, Gel)', tag: 'B/B' },
+    { label: 'Biochemistry: Lipids', tag: 'B/B' },
+    { label: 'Gene Regulation', tag: 'B/B' },
+  ],
+  ps: [
+    { label: 'Classical Conditioning', tag: 'P/S' },
+    { label: 'Operant Conditioning', tag: 'P/S' },
+    { label: 'Memory Models', tag: 'P/S' },
+    { label: 'Social Identity Theory', tag: 'P/S' },
+    { label: 'Development Theories', tag: 'P/S' },
+    { label: 'Cognitive Biases', tag: 'P/S' },
+    { label: 'Health Disparities', tag: 'P/S' },
+    { label: 'Socialization & Culture', tag: 'P/S' },
+    { label: 'Emotion & Stress', tag: 'P/S' },
+    { label: 'Neurotransmitters', tag: 'P/S' },
+  ]
+};
+
+let selectedTopic = '';
+let currentCardData = null;
+
+function buildTopicButtons() {
+  Object.entries(DC_TOPICS).forEach(([sec, topics]) => {
+    const container = document.getElementById('topics-' + sec);
+    topics.forEach(t => {
+      const btn = document.createElement('button');
+      btn.className = 'dc-topic-btn';
+      btn.innerHTML = `<span class="dc-section-tag">${t.tag}</span>${t.label}`;
+      btn.onclick = () => selectTopic(t.label, btn);
+      container.appendChild(btn);
+    });
+  });
+}
+
+function selectTopic(label, btn) {
+  document.querySelectorAll('.dc-topic-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedTopic = label;
+  document.getElementById('dc-custom').value = label;
+}
+
+async function generateCard() {
+  const topic = document.getElementById('dc-custom').value.trim() || selectedTopic;
+  if (!topic) { alert('Please select or type a topic first.'); return; }
+
+  document.getElementById('dc-loading-topic').textContent = topic;
+  document.getElementById('dc-loading').classList.add('visible');
+  document.getElementById('dc-output').classList.remove('visible');
+  document.getElementById('dc-error-box').style.display = 'none';
+  document.getElementById('dc-gen-btn').disabled = true;
+
+  const prompt = `You are an expert MCAT tutor. Generate a focused study card for: "${topic}".
+
+Respond ONLY with valid JSON. No markdown, no backticks, no extra text before or after. Use exactly this structure:
+{
+  "title": "Short topic name",
+  "section": "C/P or CARS or B/B or P/S",
+  "subtag": "e.g. Biochemistry | Enzyme Kinetics",
+  "summary": "2 sentences: what this topic is and why it matters on the MCAT.",
+  "key_concepts": [
+    {"term": "Term 1", "definition": "Concise exam-focused definition."},
+    {"term": "Term 2", "definition": "Concise exam-focused definition."},
+    {"term": "Term 3", "definition": "Concise exam-focused definition."},
+    {"term": "Term 4", "definition": "Concise exam-focused definition."}
+  ],
+  "mnemonic": "One memorable mnemonic or analogy for the core concept.",
+  "high_yield_fact": "The single most-tested fact about this topic. Be specific.",
+  "trap": "The most common MCAT trap on this topic.",
+  "practice_questions": [
+    {
+      "q": "Question 1 text",
+      "options": ["A) option", "B) option", "C) option", "D) option"],
+      "answer": "A",
+      "explanation": "Why A is correct and others are wrong."
+    },
+    {
+      "q": "Question 2 text",
+      "options": ["A) option", "B) option", "C) option", "D) option"],
+      "answer": "B",
+      "explanation": "Why B is correct and others are wrong."
+    }
+  ]
+}`;
+
+  try {
+    const apiKey = localStorage.getItem('mcat_apikey') || '';
+    if (!apiKey) {
+      document.getElementById('dc-loading').classList.remove('visible');
+      document.getElementById('dc-gen-btn').disabled = false;
+      alert('Please enter your Anthropic API key first (see the setup box above the topic list).');
+      return;
+    }
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 2500,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err?.error?.message || `HTTP ${res.status}`);
+    }
+    const data = await res.json();
+    const rawText = data.content.map(b => b.text || '').join('');
+
+    // Robust JSON extraction — pull the first {...} block regardless of surrounding text
+    let card;
+    try {
+      const jsonMatch = rawText.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) throw new Error('No JSON object found in response');
+      card = JSON.parse(jsonMatch[0]);
+    } catch(parseErr) {
+      console.error('Raw response:', rawText);
+      throw new Error('Could not parse response. Raw output logged to console. Try again.');
+    }
+
+    currentCardData = { topic, card, date: new Date().toLocaleDateString() };
+    renderCard(card, topic);
+  } catch(e) {
+    document.getElementById('dc-loading').classList.remove('visible');
+    document.getElementById('dc-gen-btn').disabled = false;
+    const errBox = document.getElementById('dc-error-box');
+    errBox.textContent = '⚠ ' + e.message;
+    errBox.style.display = 'block';
+    console.error('Card generation error:', e);
+  }
+}
+
+const SECTION_COLORS = { 'C/P': 'badge-cp', 'CARS': 'badge-cars', 'B/B': 'badge-bb', 'P/S': 'badge-ps' };
+
+function renderCard(card, topic) {
+  document.getElementById('dc-out-title').textContent = card.title || topic;
+  document.getElementById('dc-out-meta').textContent = card.subtag || '';
+  const secBadge = document.getElementById('dc-out-section');
+  secBadge.textContent = card.section || '';
+  secBadge.className = 'badge ' + (SECTION_COLORS[card.section] || 'badge-teal');
+
+  const body = document.getElementById('dc-out-body');
+  body.innerHTML = '';
+
+  // Summary
+  if (card.summary) {
+    const s = document.createElement('div'); s.className = 'dc-section';
+    s.innerHTML = `<div class="dc-section-title">Overview</div><div class="dc-section-body">${card.summary}</div>`;
+    body.appendChild(s);
+  }
+
+  // Key Concepts
+  if (card.key_concepts?.length) {
+    const s = document.createElement('div'); s.className = 'dc-section';
+    s.innerHTML = `<div class="dc-section-title">Key Concepts</div><div class="dc-section-body">${
+      card.key_concepts.map(c => `<div style="margin-bottom:10px;"><strong>${c.term}:</strong> ${c.definition}</div>`).join('')
+    }</div>`;
+    body.appendChild(s);
+  }
+
+  // Mnemonic
+  if (card.mnemonic) {
+    const s = document.createElement('div'); s.className = 'dc-section';
+    s.innerHTML = `<div class="dc-section-title">Mnemonic / Memory Aid</div><div class="dc-section-body"><div class="mnemonic">${card.mnemonic}</div></div>`;
+    body.appendChild(s);
+  }
+
+  // High-yield fact + Trap
+  if (card.high_yield_fact || card.trap) {
+    const s = document.createElement('div'); s.className = 'dc-section';
+    let html = `<div class="dc-section-title">Exam Intelligence</div><div class="dc-section-body">`;
+    if (card.high_yield_fact) html += `<div class="highlight"><strong>🎯 High-Yield:</strong> ${card.high_yield_fact}</div>`;
+    if (card.trap) html += `<div style="background:rgba(224,92,92,0.08);border-left:2px solid var(--red);padding:8px 12px;border-radius:0 6px 6px 0;margin-top:8px;font-size:13px;"><strong style="color:var(--red);">⚠️ Common Trap:</strong> ${card.trap}</div>`;
+    html += '</div>';
+    s.innerHTML = html;
+    body.appendChild(s);
+  }
+
+  // Practice Questions
+  if (card.practice_questions?.length) {
+    const s = document.createElement('div'); s.className = 'dc-section';
+    s.innerHTML = `<div class="dc-section-title">Practice Questions</div>`;
+    card.practice_questions.forEach((q, qi) => {
+      const qDiv = document.createElement('div');
+      qDiv.className = 'dc-question';
+      qDiv.innerHTML = `
+        <div class="dc-question-text"><strong>${qi+1}.</strong> ${q.q}</div>
+        <div class="dc-options">
+          ${q.options.map((opt, oi) => `<button class="dc-option" onclick="answerQ(this, '${String.fromCharCode(65+oi)}', '${q.answer}', ${qi})">${opt}</button>`).join('')}
+        </div>
+        <button class="dc-reveal-btn" onclick="revealAnswer(this, '${q.answer}', ${qi})">Show Answer</button>
+        <div class="dc-explanation" id="dc-exp-${qi}">${q.explanation}</div>
+      `;
+      s.appendChild(qDiv);
+    });
+    body.appendChild(s);
+  }
+
+  document.getElementById('dc-loading').classList.remove('visible');
+  document.getElementById('dc-output').classList.add('visible');
+  document.getElementById('dc-gen-btn').disabled = false;
+  document.getElementById('dc-output').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function answerQ(btn, chosen, correct, qi) {
+  const allOpts = btn.closest('.dc-options').querySelectorAll('.dc-option');
+  allOpts.forEach((o, i) => {
+    o.disabled = true;
+    const letter = String.fromCharCode(65 + i);
+    if (letter === correct) o.classList.add('correct');
+    else if (letter === chosen) o.classList.add('wrong');
+  });
+  document.getElementById('dc-exp-' + qi).style.display = 'block';
+}
+
+function revealAnswer(btn, correct, qi) {
+  btn.style.display = 'none';
+  const container = btn.previousElementSibling;
+  container.querySelectorAll('.dc-option').forEach((o, i) => {
+    o.disabled = true;
+    if (String.fromCharCode(65 + i) === correct) o.classList.add('revealed');
+  });
+  document.getElementById('dc-exp-' + qi).style.display = 'block';
+}
+
+function saveCard() {
+  if (!currentCardData) return;
+  if (!state.savedCards) state.savedCards = [];
+  const already = state.savedCards.some(c => c.topic === currentCardData.topic && c.date === currentCardData.date);
+  if (!already) {
+    state.savedCards.unshift(currentCardData);
+    save();
+  }
+  renderSavedCards();
+  document.querySelector('.dc-action-btn').textContent = '✓ Saved!';
+  setTimeout(() => { document.querySelector('.dc-action-btn').textContent = '⭐ Save Card'; }, 2000);
+}
+
+function renderSavedCards() {
+  if (!state.savedCards || !state.savedCards.length) return;
+  const section = document.getElementById('dc-saved-section');
+  const list = document.getElementById('dc-saved-list');
+  section.style.display = 'block';
+  list.innerHTML = state.savedCards.map((c, i) => `
+    <div class="dc-history-item" onclick="reloadCard(${i})">
+      <span class="dc-history-topic">${c.topic}</span>
+      <span class="dc-history-date">${c.date}</span>
+      <span class="dc-saved-badge">${c.card?.section || ''}</span>
+    </div>
+  `).join('');
+}
+
+function reloadCard(i) {
+  const c = state.savedCards[i];
+  if (!c) return;
+  currentCardData = c;
+  document.getElementById('dc-custom').value = c.topic;
+  renderCard(c.card, c.topic);
+}
+
+function saveApiKey() {
+  const key = document.getElementById('dc-apikey-input').value.trim();
+  if (!key.startsWith('sk-ant-')) {
+    alert('That doesn\'t look like a valid Anthropic API key. It should start with "sk-ant-".');
+    return;
+  }
+  localStorage.setItem('mcat_apikey', key);
+  document.getElementById('dc-apikey-input').value = '';
+  showApiKeyStatus();
+}
+
+function clearApiKey() {
+  localStorage.removeItem('mcat_apikey');
+  showApiKeyStatus();
+}
+
+function showApiKeyStatus() {
+  const hasKey = !!localStorage.getItem('mcat_apikey');
+  const banner = document.getElementById('dc-apikey-banner');
+  const ok = document.getElementById('dc-apikey-ok');
+  if (hasKey) {
+    banner.style.display = 'none';
+    ok.style.display = 'flex';
+  } else {
+    banner.style.display = 'flex';
+    ok.style.display = 'none';
+  }
+}
+
+buildTopicButtons();
+showApiKeyStatus();
+if (state.savedCards && state.savedCards.length) renderSavedCards();
+
+// ── INIT ──
+buildWeekPlan();
+buildFL();
+renderScores();
+renderConf();
+renderCheckins();
+updateDashboard();
+renderChart();
+</script>
+</body>
+</html>
